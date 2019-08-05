@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# prepare text files into word-per-line for analysis
+
+cat $* | tr -cs a-z A-Z '\012'
