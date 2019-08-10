@@ -19,7 +19,8 @@ do
 done
 shift `expr $OPTIND - 1`		 # leave just filenames
 
-for n in {1..$N}; do
+for (( n=1; n<=$N; n++ ))
+do
 	ACCTNO=$(printf "%02d" $n)
 	ACCT="student"${ACCTNO}
 	CRYPTPW=$(perl -e 'print crypt("'$ACCT'", "'$ACCTNO'")')
