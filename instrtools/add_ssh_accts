@@ -1,0 +1,30 @@
+#!/bin/sh
+
+N=10
+
+USAGE="$0 [-n numAccts]"
+
+function usage {		# give usage message, and exit
+	echo "Usage: ${USAGE}" 2>&1
+	exit 1
+}
+
+while getopts "n:v" opt
+do
+	case "$opt" in
+		n)	N=${OPTARG};;
+		v)	VERBOSE=v;;
+		*)	usage;;
+	esac
+done
+shift `expr $OPTIND - 1`		 # leave just filenames
+
+for n in $(count 1 $N); do
+	ACCTNO=$(printf "%02d" $n)
+	ACCT="student"${ACCTNO}
+	CRYPTPW=$(perl -e 'print crypt("'$ACCT'", "'$ACCTNO'")')
+	sudo useradd -m -p $CRYPTPW $ACCT
+	echo Created $ACCT
+done
+	
+
