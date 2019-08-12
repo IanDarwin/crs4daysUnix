@@ -1,0 +1,9 @@
+#!/bin/sh
+
+awk '{
+	totals[$1] += $4
+} END {
+	for (name in totals) {
+		print name, totals[name]
+	}
+}' < text/report.txt
