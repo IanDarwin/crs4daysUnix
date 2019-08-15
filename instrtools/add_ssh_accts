@@ -24,7 +24,7 @@ do
 	ACCTNO=$(printf "%02d" $n)
 	ACCT="student"${ACCTNO}
 	CRYPTPW=$(perl -e 'print crypt("'$ACCT'", "'$ACCTNO'")')
-	sudo useradd -m -p $CRYPTPW $ACCT
+	sudo useradd -m -p $CRYPTPW $ACCT -e -1
 	echo Created $ACCT
 done
 	
